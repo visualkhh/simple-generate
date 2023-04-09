@@ -3,6 +3,7 @@ import { NumberPipe } from 'tokens/NumberPipe';
 import { DataPipe } from 'tokens/DataPipe';
 import { LengthPipe } from 'tokens/LengthPipe';
 import { RandomPipe } from 'tokens/RandomPipe';
+import { UUIDPipe } from 'tokens/UUIDPipe';
 
 export type FieldType = 'number' | 'string' | 'boolean';
 export type AllString<T> = {
@@ -14,6 +15,7 @@ export class Generator {
   private tokens = new Map<string, () => Pipe>([
     ['number', () => new NumberPipe()],
     ['random', () => new RandomPipe()],
+    ['uuid', () => new UUIDPipe()],
     ['length', () => new LengthPipe()],
     ['data', () => new DataPipe()]
   ]);
@@ -36,10 +38,7 @@ export class Generator {
         for (let i = 0; i < groups.length; i++) {
           let tokenData: any;
           const token: Token = {
-            fullToken: groups[i][0],
-            token: groups[i][1],
-            index: groups[i].index,
-            input: groups[i].input
+            fullToken: groups[i][0], token: groups[i][1], index: groups[i].index, input: groups[i].input
           }
           if (token.fullToken.startsWith('!') && token.fullToken.endsWith('!')) {
             defaultType = token.token as FieldType;

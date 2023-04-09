@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "main": "index.js",
   "license": "MIT",
-  "description": "generator for simple",
+  "description": "generate for simple",
   "keywords": [
     "fetch",
     "fetcher",
@@ -13,14 +13,14 @@
   "contributors": [
     "Kurone (クロネ) (https://github.com/kurone-ab)"
   ],
-  "homepage": "https://github.com/visualkhh/simple-generator",
+  "homepage": "https://github.com/visualkhh/simple-generate",
   "bugs": {
-    "url": "https://github.com/visualkhh/simple-generator",
+    "url": "https://github.com/visualkhh/simple-generate",
     "email": "visualkhh@gmail.com"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/visualkhh/simple-generator"
+    "url": "https://github.com/visualkhh/simple-generate"
   },
   "scripts": {
     "build": "rm -rf dist && mkdir dist && cp package.json dist && tsc --outDir dist --declarationDir dist && rm -rf dist/dist && rollup -c",

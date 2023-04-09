@@ -36,7 +36,7 @@ const data = new Generator().run<DataType>({
 });
 console.log(data);
 ```
-```json
+```javascript
 {
   name: { first: 'firstName: 413311 - VVHwOwKv !!', last: 'lastName: ULN' },
   age: 0,
@@ -53,6 +53,27 @@ console.log(data);
     { name: 'name: EzzDd .', best: true },
     { name: 'name: IYNcc .', best: true }
   ]
+}
+```
+
+# add operator
+```typescript
+const generator = new Generator();
+generator.setToken('uuid', () => {
+  return new class extends Pipe {
+    generate(parameter?: string, prevData?: any): any {
+      return RandomUtils.uuid();
+    }
+  }()
+});
+const data = generator.run<DataType>({
+  street: '#{uuid}#'
+});
+```
+
+```javascript
+{
+    street: '2a29-167a-6e92-4118'
 }
 
 ```
