@@ -1,5 +1,5 @@
 {
-  "name": "simple-generator",
+  "name": "simple-generate",
   "version": "0.0.1",
   "main": "index.js",
   "license": "MIT",
@@ -28,7 +28,7 @@
     "bundle": "rollup -c",
     "bundle:watch": "rollup -c -w",
     "npm:build": "npm run build && cp package.json dist && cp .npmignore dist && cp README.MD dist && rm -rf dist/dist/bundle.js.map",
-    "npm:publish": "npm run npm-build && npm publish ./dist",
+    "npm:publish": "npm run npm:build && npm publish ./dist",
     "tsc": "tsc",
     "tsc:watch": "rm -rf ./dist && mkdir dist && cp package.json dist && tsc --watch --outDir dist --declarationDir dist --sourceMap true"
   },
