@@ -29,6 +29,12 @@ export class RandomUtils {
         return color
     }
 
+    static getRandomBoolean(): boolean {
+        const number = Math.random();
+        const sw = number > 0.5
+        return sw;
+    }
+
     // (Math.random().toString(36)+'00000000000000000').slice(2, 10) + Date.now()
     static getRandomString(len: number): string {
         const letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')

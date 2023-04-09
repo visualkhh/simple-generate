@@ -3,55 +3,55 @@ simple-generator
 
 # data generator library
 ```typescript
+import { Generator, number, string, boolean } from 'simple-generator';
 
-const g = new Generator();
-const data = {
+export type DataType = {
   name: {
-    first: 'first',
-    last: 'last'
+    first: string,
+    last: string
 
   },
-  age: 12,
+  age: number,
   address: {
-    city: 'city',
-    street: 'street',
-    number: 12
+    city: string,
+    street: string
   },
-  firends: [{name: 'a'}]
+  friends: {name: string, best: boolean}[]
 }
 
-const gg = g.dummy<typeof data>({
+const data = new Generator().run<DataType>({
   name: {
-    first: '안녕 ${random:1..5,6}$ ${random:string:8}$  하세요',
-    last: 'b'
+    first: string`firstName: #{random:1..5;6}# - #{random:string;8}# !!`,
+    last: 'lastName: #{random:string;3}#'
   },
-  age: '${random:1..5,5}$',
+  age: number`#{random:1..5,5}#`,
   address: {
-    city: 'd',
-    street: 'e',
-    number: 'f'
+    city: '#{data:["1","2","3","4"]|random}#',
+    street: 'e'
   },
-  firends: [
-    {name: 'name: ${random:string}$ 입니다.'}
+  friends: [
+    ...new Array(10).fill(0).map(() => ({name: 'name: #{random:string}# .', best: boolean`#{random:boolean}#`}))
+
   ]
 });
+console.log(data);
 ```
 ```json
 {
-  "name": {
-    "first": "안녕 121113 LYoIU  하세요",
-    "last": "b"
-  },
-  "age": "44143",
-  "address": {
-    "city": "d",
-    "street": "e",
-    "number": "f"
-  },
-  "firends": [
-    {
-      "name": "name: uTUbo 입니다."
-    }
+  name: { first: 'firstName: 413311 - VVHwOwKv !!', last: 'lastName: ULN' },
+  age: 0,
+  address: { city: '4', street: 'e' },
+  friends: [
+    { name: 'name: eVtKp .', best: true },
+    { name: 'name: hVKum .', best: false },
+    { name: 'name: TlJUw .', best: true },
+    { name: 'name: JobUn .', best: false },
+    { name: 'name: qTOLU .', best: false },
+    { name: 'name: uVOvA .', best: false },
+    { name: 'name: UdqSn .', best: false },
+    { name: 'name: wVNzn .', best: true },
+    { name: 'name: EzzDd .', best: true },
+    { name: 'name: IYNcc .', best: true }
   ]
 }
 

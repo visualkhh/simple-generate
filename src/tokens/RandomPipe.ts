@@ -2,26 +2,33 @@ import { Pipe } from 'tokens/Pipe';
 import { RandomUtils } from 'utils/random/RandomUtils';
 
 export class RandomPipe extends Pipe {
-  generate(parameter?: string, preveData?: any): any {
-    if (parameter && Array.isArray(preveData)) {
-      return preveData[Math.floor(Math.random() * preveData.length)];
+  generate(parameterFull?: string, preveData?: any): any {
+    const parameter = parameterFull?.split(';')[0];
+    const parameterOption = parameterFull?.split(';')[1];
+    if (Array.isArray(preveData)) {
+      const length = Number(parameter ?? '1');
+      const result = [];
+      for (let i = 0; i < Number(length); i++) {
+        result.push(preveData[Math.floor(Math.random() * preveData.length)]);
+      }
+      return result.join('');
     } else if (parameter && parameter.includes('..')) {
-      const data = parameter.split(',')[0];
-      const length = parameter.split(',')[1] ?? 1;
-      const range = data.split('..');
+      const length = parameterOption ?? 1;
+      const range = parameter.split('..');
       const min = Number(range[0]);
       const max = Number(range[1]);
-      let result = [];
+      const result = [];
       for (let i = 0; i < Number(length); i++) {
         result.push(Math.floor(RandomUtils.random(Math.min(min, max), Math.max(min, max))));
       }
       return Number(result.join(''));
     } else if (parameter && parameter.startsWith('string')) {
-      const data = parameter.split(',')[0];
-      const length = parameter.split(',')[1];
-      return RandomUtils.getRandomString(Number(length ?? 5));
+      const length = parameterOption ?? 5;
+      return RandomUtils.getRandomString(Number(length));
     } else if (parameter && parameter.startsWith('color')) {
       return RandomUtils.getRandomColor();
+    } else if (parameter && parameter.startsWith('boolean')) {
+      return RandomUtils.getRandomBoolean();
     } else {
       return Math.random();
     }
