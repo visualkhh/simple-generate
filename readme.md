@@ -24,7 +24,7 @@ const data = new Generator().run<DataType>({
     first: string`firstName: #{random:1..5;6}# - #{random:string;8}# !!`,
     last: 'lastName: #{random:string;3}#'
   },
-  age: number`#{random:1..5,5}#`,
+  age: number`#{random:1..5;5}#`,
   address: {
     city: '#{data:["1","2","3","4"]|random}#',
     street: 'e'
