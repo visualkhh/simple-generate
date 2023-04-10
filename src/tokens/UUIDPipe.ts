@@ -1,4 +1,4 @@
-import { Pipe } from 'tokens/Pipe';
+import { Pipe } from './Pipe';
 import { RandomUtils } from '../utils/random/RandomUtils';
 
 export class UUIDPipe extends Pipe {

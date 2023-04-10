@@ -1,5 +1,5 @@
-import { Pipe } from 'tokens/Pipe';
-import { RandomUtils } from 'utils/random/RandomUtils';
+import { Pipe } from './Pipe';
+import { RandomUtils } from '../utils/random/RandomUtils';
 
 export class RandomPipe extends Pipe {
   generate(parameterFull?: string, preveData?: any): any {

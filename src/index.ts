@@ -1,9 +1,9 @@
-import { Pipe, PipeMeta } from 'tokens/Pipe';
-import { NumberPipe } from 'tokens/NumberPipe';
-import { DataPipe } from 'tokens/DataPipe';
-import { LengthPipe } from 'tokens/LengthPipe';
-import { RandomPipe } from 'tokens/RandomPipe';
-import { UUIDPipe } from 'tokens/UUIDPipe';
+import { Pipe, PipeMeta } from './tokens/Pipe';
+import { NumberPipe } from './tokens/NumberPipe';
+import { DataPipe } from './tokens/DataPipe';
+import { LengthPipe } from './tokens/LengthPipe';
+import { RandomPipe } from './tokens/RandomPipe';
+import { UUIDPipe } from './tokens/UUIDPipe';
 
 export type FieldType = 'number' | 'string' | 'boolean';
 export type AllString<T> = {

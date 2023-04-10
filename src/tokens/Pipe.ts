@@ -1,6 +1,3 @@
-
-// export type PipeMeta = { prevData?: any, nextPipe?: Pipe };
-
 export type PipeMeta = {
   name: string;
   full: string;
