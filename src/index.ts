@@ -6,8 +6,9 @@ import { RandomPipe } from './tokens/RandomPipe';
 import { UUIDPipe } from './tokens/UUIDPipe';
 
 export type FieldType = 'number' | 'string' | 'boolean';
-export type AllString<T> = {
-  [P in keyof T]: T[P] extends object ? AllString<T[P]> : string
+export type GenerateFieldType = string | (() => string);
+export type GenerateObjectType<T> = {
+  [P in keyof T]: T[P] extends object ? GenerateObjectType<T[P]> : GenerateFieldType;
 }
 export type Token = { fullToken: string, token: string, index: number, input: string };
 
@@ -24,16 +25,27 @@ export class Generator {
     this.tokens.set(name, token);
   }
 
-  run<R = any>(data: AllString<R>): R {
-    const rData = JSON.parse(JSON.stringify(data));
+  run<R> (data: GenerateFieldType): R;
+  // eslint-disable-next-line no-dupe-class-members
+  run<R>(data: GenerateObjectType<R>): R;
+  // eslint-disable-next-line no-dupe-class-members
+  run<R>(data: GenerateObjectType<R> | GenerateFieldType): R {
+    if (typeof data === 'string' || typeof data === 'function') {
+      return this.executeRun(Object.assign({}, {data})).data as R;
+    }
+    return this.executeRun(Object.assign({}, data));
+  }
 
+  executeRun<R = any>(data: GenerateObjectType<R>): R {
+    const rData = data as any;
     for (const [key, value] of Object.entries(rData)) {
       if (typeof value === 'object') {
-        const dummy1 = this.run(value as AllString<R>);
+        const dummy1 = this.executeRun((Array.isArray(value) ? [...value] : {...value}) as GenerateObjectType<R>);
         rData[key] = dummy1;
-      } else if (typeof value === 'string') {
+      } else if (typeof value === 'string' || typeof value === 'function') {
         let defaultType: FieldType = 'string';
-        const groups = Generator.exporesionGrouops(value);
+        const targetValue = typeof value === 'function' ? value() : value;
+        const groups = Generator.exporesionGrouops(targetValue);
         const tokenDatas: any[] = [];
         for (let i = 0; i < groups.length; i++) {
           let tokenData: any;
@@ -62,7 +74,7 @@ export class Generator {
         // bind replace
         tokenDatas.reverse();
         groups.reverse();
-        let rvalue = value;
+        let rvalue = targetValue;
         groups.forEach((g, i) => {
           const head = rvalue.substring(0, g.index);
           const body = tokenDatas[i] as string ?? '';
@@ -102,6 +114,19 @@ export class Generator {
   }
 }
 
+export const Type = (type: FieldType, data: string) => {
+  return `!{${type}}!${data}`;
+}
+export const NumberType = (data: string) => {
+  return Type('number', data);
+}
+export const StringType = (data: string) => {
+  return Type('string', data);
+}
+export const BooleanType = (data: string) => {
+  return Type('boolean', data);
+}
+
 export const number = (literals: TemplateStringsArray, ...placeholders: string[]) => {
   return type('number', literals, ...placeholders);
 }
@@ -114,7 +139,6 @@ export const boolean = (literals: TemplateStringsArray, ...placeholders: string[
 
 export const type = (type: FieldType, literals: TemplateStringsArray, ...placeholders: string[]) => {
   let result = `!{${type}}!`;
-
   for (let i = 0; i < placeholders.length; i++) {
     result += literals[i];
     result += placeholders[i];

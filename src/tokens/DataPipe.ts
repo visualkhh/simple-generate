@@ -7,5 +7,4 @@ export class DataPipe extends Pipe {
       return ScriptUtils.evalReturn(parameter, {});
     }
   }
-
 }

@@ -11,6 +11,6 @@
   "license": "ISC",
   "dependencies": {
     "tsx": "^3.12.6",
-    "simple-generator": "file:../dist"
+    "simple-generate": "file:../dist"
   }
 }
