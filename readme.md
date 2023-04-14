@@ -2,6 +2,23 @@ simple-generator
 ===
 
 # data generator library
+```shell
+npx simple-generate "{\"name\": \"#{random}#\"}"
+or 
+node ./node_modules/.bin/simple-generate "{\"name\": \"#{random}#\"}"
+```
+```text
+{"name":"0.6474831139567763"}
+```
+- input
+  - json string 
+    - "{'name': '#{random}#'}"
+  - string 
+    -  "#{random:color}#"
+    -  "#{random}#"
+
+
+## typescript
 ```typescript
 import { Generator, number, string, boolean, GenerateFieldType, NumberType } from 'simple-generate';
 
@@ -45,7 +62,6 @@ console.log(rData);
 
 const riData = generator.run<number>(NumberType('#{random:1..5;5}#'));
 console.log('random', riData);
-
 ```
 ```javascript
 {
@@ -67,10 +83,9 @@ console.log('random', riData);
     ]
 }
 random 42141
-
 ```
 
-# add operator
+## add operator
 ```typescript
 const generator = new Generator();
 generator.setToken('uuid2', () => {
@@ -84,10 +99,9 @@ const data = generator.run<DataType>({
   street: '#{uuid2}#'
 });
 ```
-
 ```javascript
 {
     street: '2a29-167a-6e92-4118'
 }
-
 ```
+
