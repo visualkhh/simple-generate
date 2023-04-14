@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+
 import * as process from 'process';
 import { Generator } from './index';
 
