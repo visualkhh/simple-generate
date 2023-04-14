@@ -12,7 +12,7 @@ node ./node_modules/.bin/simple-generate "{\"name\": \"#{random}#\"}"
 ```
 - input
   - json string 
-    - "{'name': '#{random}#'}"
+    - "{\"name\": \"#{random}#\"}"
   - string 
     -  "#{random:color}#"
     -  "#{random}#"
