@@ -1,8 +1,10 @@
 {
   "name": "simple-generate",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "main": "index.js",
-  "bin": "simple-generate.js",
+  "bin": {
+    "simple-generate": "simple-generate.js"
+  },
   "license": "MIT",
   "description": "generate for simple",
   "keywords": [
