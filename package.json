@@ -1,6 +1,6 @@
 {
   "name": "simple-generate",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "main": "index.js",
   "bin": {
     "simple-generate": "simple-generate.js"
