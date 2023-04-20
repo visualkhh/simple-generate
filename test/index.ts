@@ -1,4 +1,5 @@
 import { Generator, number, string, boolean, GenerateFieldType, NumberType } from 'simple-generate';
+import { GenerateObjectType } from 'src';
 
 export type DataType = {
   name: {
@@ -16,7 +17,7 @@ export type DataType = {
 }
 
 const generator = new Generator();
-const data: GenerateFieldType<DataType> = {
+const data: GenerateObjectType<DataType> = {
   name: {
     first: string`firstName: #{random:1..5;6}# - #{random:string;8}# !!`,
     last: 'lastName: #{random:string;3}#'
@@ -40,3 +41,8 @@ console.log(rData);
 
 const riData = generator.run<number>(NumberType('#{random:1..5;5}#'));
 console.log('random', riData);
+
+const arrayData = Array.from({ length: 5 }, (v, i) => ({ sid: '#{uuid}#', name: '#{random:string;4}#' }));
+const arrayResult = generator.run<{name: string, sid: string}[]>(arrayData)
+console.log('Array', arrayResult);
+

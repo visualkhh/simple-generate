@@ -33,7 +33,9 @@ export class Generator {
     if (typeof data === 'string' || typeof data === 'function') {
       return this.executeRun(Object.assign({}, {data})).data as R;
     }
-    return this.executeRun(Object.assign({}, data));
+
+    // @ts-ignore
+    return this.executeRun(Array.isArray(data) ? [...data] : Object.assign({}, data));
   }
 
   executeRun<R = any>(data: GenerateObjectType<R>): R {

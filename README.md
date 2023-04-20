@@ -59,30 +59,43 @@ const data: GenerateFieldType<DataType> = {
 };
 const rData = generator.run<DataType>(data);
 console.log(rData);
+// {
+//   name: { first: 'firstName: 313131 - rDCvgpbL !!', last: 'lastName: KDB' },
+//   age: 24424,
+//           age1: 42211,
+//         address: { city: '3', street: '066f-127b-4ec6-bbf8' },
+//   friends: [
+//     { name: 'name: opfBI .', best: true, address: '1681319622621 !!' },
+//     { name: 'name: pvoll .', best: false, address: '1681319622621 !!' },
+//     { name: 'name: VfJWI .', best: true, address: '1681319622621 !!' },
+//     { name: 'name: VdZYQ .', best: true, address: '1681319622621 !!' },
+//     { name: 'name: lEjmE .', best: true, address: '1681319622621 !!' },
+//     { name: 'name: eybRF .', best: false, address: '1681319622622 !!' },
+//     { name: 'name: yCgSG .', best: true, address: '1681319622622 !!' },
+//     { name: 'name: XKPER .', best: false, address: '1681319622622 !!' },
+//     { name: 'name: gDeiL .', best: true, address: '1681319622622 !!' },
+//     { name: 'name: HMszo .', best: true, address: '1681319622622 !!' }
+//   ]
+// }
 
+```
+```typescript
 const riData = generator.run<number>(NumberType('#{random:1..5;5}#'));
 console.log('random', riData);
+// random 42141
 ```
-```javascript
-{
-    name: { first: 'firstName: 313131 - rDCvgpbL !!', last: 'lastName: KDB' },
-    age: 24424,
-        age1: 42211,
-        address: { city: '3', street: '066f-127b-4ec6-bbf8' },
-    friends: [
-        { name: 'name: opfBI .', best: true, address: '1681319622621 !!' },
-        { name: 'name: pvoll .', best: false, address: '1681319622621 !!' },
-        { name: 'name: VfJWI .', best: true, address: '1681319622621 !!' },
-        { name: 'name: VdZYQ .', best: true, address: '1681319622621 !!' },
-        { name: 'name: lEjmE .', best: true, address: '1681319622621 !!' },
-        { name: 'name: eybRF .', best: false, address: '1681319622622 !!' },
-        { name: 'name: yCgSG .', best: true, address: '1681319622622 !!' },
-        { name: 'name: XKPER .', best: false, address: '1681319622622 !!' },
-        { name: 'name: gDeiL .', best: true, address: '1681319622622 !!' },
-        { name: 'name: HMszo .', best: true, address: '1681319622622 !!' }
-    ]
-}
-random 42141
+```typescript
+const arrayData = Array.from({ length: 5 }, (v, i) => ({ sid: '#{uuid}#', name: '#{random:string;4}#' }));
+const arrayResult = generator.run<{name: string, sid: string}[]>(arrayData)
+console.log('Array', arrayResult);
+// Array [
+//         { sid: '637c-c022-73ff-2c59', name: 'Wsnt' },
+//                 { sid: '65fc-177c-7e52-ab69', name: 'TGAQ' },
+//                 { sid: 'aedb-5d21-692b-2bfe', name: 'GEUB' },
+//                 { sid: '5a89-ebd2-4d50-7c7b', name: 'QQEv' },
+//                 { sid: '503e-df6a-761d-28d2', name: 'ulWA' }
+//         ]
+
 ```
 
 ## add operator
@@ -98,10 +111,9 @@ generator.setToken('uuid2', () => {
 const data = generator.run<DataType>({
   street: '#{uuid2}#'
 });
-```
-```javascript
-{
-    street: '2a29-167a-6e92-4118'
-}
+
+// {
+//   street: '2a29-167a-6e92-4118'
+// }
 ```
 

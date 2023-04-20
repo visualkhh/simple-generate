@@ -1,9 +1,9 @@
 {
   "name": "simple-generate",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "main": "index.js",
   "bin": {
-    "simple-generate": "simple-generate.js"
+    "simple-generate": "bin.js"
   },
   "license": "MIT",
   "description": "generate for simple",
